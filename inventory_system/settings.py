@@ -91,7 +91,12 @@ WSGI_APPLICATION = 'inventory_system.wsgi.application'
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 if not DATABASE_URL:
-    DATABASE_URL = os.getenv('POSTGRES_URL') or os.getenv('POSTGRESQL_URL')
+    DATABASE_URL = (
+        os.getenv('RENDER_DATABASE_URL')
+        or os.getenv('POSTGRES_URL')
+        or os.getenv('POSTGRESQL_URL')
+        or os.getenv('RENDER_POSTGRES_URL')
+    )
 
 if DATABASE_URL:
     DATABASES = {
